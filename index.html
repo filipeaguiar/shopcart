@@ -1,58 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="ShopCart">
     <head>
-        <link rel="manifest" href="manifest.json">
+        <link rel="manifest" href="manifest2.json">
         <style>
             body {
                 background-color: black;
                 font-family: Verdana, Geneva, Tahoma, sans-serif;
-                color: white;
+                color: #F5F5F5;
             }
             input {
                 display: block;
                 border-radius: 5px;
-                border: 1px black;
+                border: 1px #616161 solid;
                 padding: 10px 5px;
-                margin: 10px 0px;
+                margin: 10px 0;
                 width: 100%;
-                background-color: #CACACA;
+                background-color: #212121;
+                color: #F5F5F5;
                 font-size: 1em;
-                box-sizing: border-box
+                box-sizing: border-box;
             }
             form {
-                margin:auto;
+                margin: auto;
                 padding-top: 10px;
                 align-content: center;
-                width: 80%
+                width: 85%;
             }
             h2 {
                 margin-top: 1em;
                 font-size: 1.5em;
                 text-align: center;
+                width: 100%;
             }
-            h3, h4 {
-                margin: 10px
+            h3,
+            h4 {
+                margin: 10px;
             }
             button {
                 display: block;
                 border-radius: 5px;
                 font-size: 1em;
                 border: 1px black;
-                margin: 5px 0px;
+                margin: 5px 0;
                 padding: 10px;
                 font-weight: bold;
                 width: 100%;
-                color: white
+                color: white;
             }
             .add {
-                background-color: #4CAF50
+                background-color: #4CAF50;
             }
             .remove {
-                background-color: #F44336
+                background-color: #F44336;
             }
             .total {
                 font-weight: bold;
                 color: #4CAF50;
+            }
+            .box {
+                background-color: #212121;
+                width: 85%;
+                padding: 1px 2px;
+                border-radius: 5px;
+                margin: auto;
+                margin-top: 5px;
+                box-sizing: border-box;
+                border: 1px #616161 solid;
             }
         </style>
         <script
@@ -71,9 +84,7 @@
             integrity="sha256-23hi0Ag650tclABdGCdMNSjxvikytyQ44vYGo9HyOrU="
             crossorigin="anonymous"></script>
         <script>
-            // $(document).ready(() => {
-            //     $('.preco').mask('000,00', {reverse: true})
-            // })
+            // $(document).ready(() => {     $('.preco').mask('000,00', {reverse: true}) })
             angular.module('ShopCart', [])
             angular
                 .module('ShopCart')
@@ -81,7 +92,7 @@
                     $scope.total = 0
                     $scope.preco = 0
                     $scope.quantidade = 1
-                    
+
                     $scope.calculaTotal = (p, q) => {
                         $scope.desfazerValue = p * q
                         $scope.total = $scope.total + (p * q)
@@ -99,15 +110,36 @@
     </head>
     <body ng-controller="cartCtrl">
         <div class="content">
-            <h2>Compras</h2>
-            <h3>Total =<span class="total"> {{total | currency : "R$": 2}}</span></h3>
-            <h4>Preço = {{preco | currency : "R$" : 2}}</h4>
+            <div class="box">
+                <h2>Compras</h2>
+            </div>
+            <div class="box">
+                <h3>Total =<span class="total">
+                        {{total | currency : "R$": 2}}</span></h3>
+            </div>
+            <div class="box">
+                <h4>Preço =
+                    {{preco | currency : "R$" : 2}}</h4>
+            </div>
             <form>
-            <input type="number" required="required" class="preco" name="preco" ng-model="preco" step="0.01" onfocus="this.value=''"/>
-            <input type="number" required="required" value="1" name="quantidade" ng-model="quantidade" onfocus="this.value=''">
-            <button class="add" ng-click="calculaTotal(preco, quantidade)">Adicionar</button>
-            <button class="remove" ng-click="desfazer()">Remover Último</button>
-        </form>
+                <input
+                    type="number"
+                    required="required"
+                    class="preco"
+                    name="preco"
+                    ng-model="preco"
+                    step="0.01"
+                    onfocus="this.value=''"/>
+                <input
+                    type="number"
+                    required="required"
+                    value="1"
+                    name="quantidade"
+                    ng-model="quantidade"
+                    onfocus="this.value=''">
+                <button class="add" ng-click="calculaTotal(preco, quantidade)">Adicionar</button>
+                <button class="remove" ng-click="desfazer()">Remover Último</button>
+            </form>
         </div>
     </body>
 </html>
