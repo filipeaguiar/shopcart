@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ShopCart">
+    <head>
+        <link rel="manifest" href="manifest2.json">
+        <style>
+            body {
+                background-color: black;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                color: white;
+            }
+            input {
+                display: block;
+                border-radius: 5px;
+                border: 1px black;
+                padding: 10px 5px;
+                margin: 10px 0px;
+                width: 100%;
+                background-color: #CACACA;
+                font-size: 1em;
+                box-sizing: border-box
+            }
+            form {
+                margin:auto;
+                padding-top: 10px;
+                align-content: center;
+                width: 80%
+            }
+            h2 {
+                margin-top: 1em;
+                font-size: 1.5em;
+                text-align: center;
+            }
+            h3, h4 {
+                margin: 10px
+            }
+            button {
+                display: block;
+                border-radius: 5px;
+                font-size: 1em;
+                border: 1px black;
+                margin: 5px 0px;
+                padding: 10px;
+                font-weight: bold;
+                width: 100%;
+                color: white
+            }
+            .add {
+                background-color: #4CAF50
+            }
+            .remove {
+                background-color: #F44336
+            }
+            .total {
+                font-weight: bold;
+                color: #4CAF50;
+            }
+        </style>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"
+            integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4="
+            crossorigin="anonymous"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"
+            integrity="sha256-23hi0Ag650tclABdGCdMNSjxvikytyQ44vYGo9HyOrU="
+            crossorigin="anonymous"></script>
+        <script>
+            // $(document).ready(() => {
+            //     $('.preco').mask('000,00', {reverse: true})
+            // })
+            angular.module('ShopCart', [])
+            angular
+                .module('ShopCart')
+                .controller('cartCtrl', $scope => {
+                    $scope.total = 0
+                    $scope.preco = 0
+                    $scope.quantidade = 1
+                    
+                    $scope.calculaTotal = (p, q) => {
+                        $scope.desfazerValue = p * q
+                        $scope.total = $scope.total + (p * q)
+                        $scope.preco = 0
+                        $scope.quantidade = 1
+                    }
+
+                    $scope.desfazer = () => {
+                        $scope.total = $scope.total - $scope.desfazerValue
+                        $scope.desfazerValue = 0
+                    }
+                })
+        </script>
+        <title>Shop Cart</title>
+    </head>
+    <body ng-controller="cartCtrl">
+        <div class="content">
+            <h2>Compras</h2>
+            <h3>Total =<span class="total"> {{total | currency : "R$": 2}}</span></h3>
+            <h4>Preço = {{preco | currency : "R$" : 2}}</h4>
+            <form>
+            <input type="number" required="required" class="preco" name="preco" ng-model="preco" step="0.01" onfocus="this.value=''"/>
+            <input type="number" required="required" value="1" name="quantidade" ng-model="quantidade" onfocus="this.value=''">
+            <button class="add" ng-click="calculaTotal(preco, quantidade)">Adicionar</button>
+            <button class="remove" ng-click="desfazer()">Remover Último</button>
+        </form>
+        </div>
+    </body>
+</html>
