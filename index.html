@@ -101,6 +101,7 @@
                         $scope.total = $scope.total + (p * q)
                         $scope.preco = 0
                         $scope.quantidade = 1
+                        $('#preco').focus()
                     }
 
                     $scope.desfazer = () => {
@@ -132,7 +133,8 @@
                     name="preco"
                     ng-model="preco"
                     step="0.01"
-                    onfocus="this.value=''"/>
+                    onfocus="this.value=''"
+                    id="preco"/>
                 <input
                     type="number"
                     required="required"
