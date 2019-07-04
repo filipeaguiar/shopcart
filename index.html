@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt_BR" ng-app="ShopCart">
+<html lang="pt-br" ng-app="ShopCart">
     <head>
         <link rel="manifest" href="manifest.json">
         <style>
@@ -59,10 +59,10 @@
                 outline: none;
             }
             .add {
-                background-color: #4CAF50;
+                background-color: rgb(20, 77, 21);
             }
             .remove {
-                background-color: #F44336;
+                background-color: rgb(148, 30, 21);
             }
             .total {
                 font-weight: bold;
@@ -82,6 +82,55 @@
                 margin-top: 3em
             }
         </style>
+        <meta charset="UTF-8">
+        <meta name="theme-color" content="#212121">
+        <meta name="description" content="ShopCart - shopping calculator">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Shop Cart</title>
+    </head>
+    <body ng-controller="cartCtrl">
+        <div class="content">
+            <div class="box">
+                <h2>Compras</h2>
+            </div>
+            <div class="box">
+                <h3>Total =<span class="total">
+                        {{total | currency : "R$": 2}}</span></h3>
+            </div>
+            <div class="box">
+                <h4>Preço =
+                    {{preco | currency : "R$" : 2}}</h4>
+            </div>
+            <form>
+                <label for="preco">
+                    <span>Valor unitário:</span>
+                    <input
+                        type="number"
+                        class="preco"
+                        name="preco"
+                        ng-model="preco"
+                        step="0.01"
+                        onfocus="this.value=''"
+                        id="preco"
+                        min="0"
+                        autofocus/>
+                </label>
+                <label for="quantidade">
+                    <span>Quantidade:</span>
+                    <input
+                        id="quantidade"
+                        type="number"
+                        value="1"
+                        min="1"
+                        name="quantidade"
+                        ng-model="quantidade"
+                        onfocus="this.value=''">
+                </label>
+                <button class="add" ng-click="calculaTotal(preco, quantidade)">Adicionar</button>
+                <button class="remove" ng-click="desfazer()">Remover Último</button>
+            </form>
+        </div>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -90,9 +139,6 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"
             integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4="
             crossorigin="anonymous"></script>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"
             integrity="sha256-23hi0Ag650tclABdGCdMNSjxvikytyQ44vYGo9HyOrU="
@@ -122,40 +168,5 @@
                     }
                 })
         </script>
-        <title>Shop Cart</title>
-    </head>
-    <body ng-controller="cartCtrl">
-        <div class="content">
-            <div class="box">
-                <h2>Compras</h2>
-            </div>
-            <div class="box">
-                <h3>Total =<span class="total">
-                        {{total | currency : "R$": 2}}</span></h3>
-            </div>
-            <div class="box">
-                <h4>Preço =
-                    {{preco | currency : "R$" : 2}}</h4>
-            </div>
-            <form>
-                <input
-                    type="number"
-                    class="preco"
-                    name="preco"
-                    ng-model="preco"
-                    step="0.01"
-                    onfocus="this.value=''"
-                    id="preco"
-                    autofocus/>
-                <input
-                    type="number"
-                    value="1"
-                    name="quantidade"
-                    ng-model="quantidade"
-                    onfocus="this.value=''">
-                <button class="add" ng-click="calculaTotal(preco, quantidade)">Adicionar</button>
-                <button class="remove" ng-click="desfazer()">Remover Último</button>
-            </form>
-        </div>
     </body>
 </html>
